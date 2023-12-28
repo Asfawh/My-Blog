@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-blog:$(date +%s)
+      run: docker build . --file Dockerfile --tag my-blog:$(date +"%Y-%m-%d")
 
     - name: docker login
       run: |
@@ -23,5 +23,5 @@ jobs:
   
     - name: Publish the Docker image with the specified tag
       run: |
-        docker image push -a habtamu/my-blog
+        docker image push -a habtamu/my-blog:$(date +"%Y-%m-%d")
     
