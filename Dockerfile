@@ -8,7 +8,7 @@ FROM nginx
 COPY ./html /usr/share/nginx/html
 
 # Copy image files to a subdirectory in the Nginx web server root
-COPY ./images /usr/share/nginx/html/images
+COPY ./html/images /usr/share/nginx/html/images
 
 # Expose port 80 to the outside world
 EXPOSE 80
