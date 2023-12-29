@@ -18,22 +18,21 @@ jobs:
     - name: docker login
       run: |
         docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
-
+    - name: Pull an image from Docker Hub
+      run: |
+        docker image pull habtamu/my-blog:latest  
     - name: Tag and Build the Docker image
       run: |
         # Set the date and timestamp variables
         DATE=$(date +"%Y-%m-%d")
-        TIMESTAMP=$(date +"%H%M%S")
         
         # Set the Docker tag with the desired format
-        DOCKER_TAG="${DATE}-${TIMESTAMP}"
+        DOCKER_TAG="${DATE}"
         
         docker image tag habtamu/my-blog habtamu/my-blog:${DOCKER_TAG}
-
         # Build the Docker image
         docker buildx create --use
         docker buildx build --platform linux/amd64,linux/arm64 -t habtamu/my-blog:${DOCKER_TAG} .
-
     - name: Publish the Docker image with the specified tag
       run: |
         docker image push -a habtamu/my-blog
