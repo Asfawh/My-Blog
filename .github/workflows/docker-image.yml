@@ -19,6 +19,10 @@ jobs:
       run: |
         docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
 
+    - name: Pull an image from Docker Hub
+      run: |
+        docker image pull habtamu/myplugin:latest  
+
     - name: Tag and Build the Docker image
       run: |
         # Set the date and timestamp variables
